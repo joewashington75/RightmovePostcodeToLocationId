@@ -5,7 +5,7 @@ services:
         environment:
           - SA_PASSWORD=Pass@word
           - ACCEPT_EULA=Y
-          - DATABASE=Postcodes
+          - DATABASE=RightmoveDemo
         ports:
           - "5433:1433"
         volumes: 
@@ -27,4 +27,4 @@ services:
     postcodeprocessor-console:
         environment:
             - Rabbitmq__Host=${SERVICE_BUS:-rabbitmq}
-            - SqlConnectionString=${AZURE_DB:-Server=sqldata;Database=Postcodes;User Id=sa;Password=Pass@word;MultipleActiveResultSets=true;}
+            - SqlConnectionString=${AZURE_DB:-Server=sqldata;Database=RightmoveDemo;User Id=sa;Password=Pass@word;MultipleActiveResultSets=true;}
