@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+    sqldata:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+
+    rabbitmq:
+        image: rabbitmq:3-management
+
+    postcodepopulator-console:
+        image: ${DOCKER_REGISTRY-}postcodepopulator
+        build:
+            context: .
+            dockerfile: PostcodePopulator/PostcodePopulator.Console/Dockerfile
+        depends_on: 
+            - rabbitmq
+
+    postcodeprocessor-console:
+        image: ${DOCKER_REGISTRY-}rightmovepostcodetolocationidmessageprocessor
+        build:
+            context: .
+            dockerfile: PostcodeProcessor/PostcodeProcessor.Console/Dockerfile
+        depends_on: 
+            - rabbitmq
+            - postcodepopulator-console
+            - sqldata

@@ -1,0 +1,30 @@
+version: '3.4'
+
+services: 
+    sqldata:
+        environment:
+          - SA_PASSWORD=Pass@word
+          - ACCEPT_EULA=Y
+          - DATABASE=Postcodes
+        ports:
+          - "5433:1433"
+        volumes: 
+          - C:\MSSQL\rightmovedemo\data:/var/opt/mssql/data
+          - C:\MSSQL\rightmovedemo\log:/var/opt/mssql/log
+          - C:\MSSQL\rightmovedemo\secrets:/var/opt/mssql/secrets
+        #entrypoint: sh
+        #command: -c '/opt/mssql/bin/sqlservr & /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -U sa -P $${SA_PASSWORD} -d tempdb -q "CREATE DATABASE $${DATABASE}"; USE $${DATABASE}; CREATE TABLE PostcodeLocationMapper(Postcode varchar(9) Primary Key, LocationId varchar(30),ProcessingStatus varchar(30)); wait;'
+
+    rabbitmq:
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+
+    postcodepopulator-console:
+        environment: 
+            - Rabbitmq__Host=${SERVICE_BUS:-rabbitmq}
+            
+    postcodeprocessor-console:
+        environment:
+            - Rabbitmq__Host=${SERVICE_BUS:-rabbitmq}
+            - SqlConnectionString=${AZURE_DB:-Server=sqldata;Database=Postcodes;User Id=sa;Password=Pass@word;MultipleActiveResultSets=true;}
