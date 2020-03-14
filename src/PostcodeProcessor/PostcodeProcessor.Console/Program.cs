@@ -25,8 +25,8 @@ namespace RightmovePostcodeToLocationId.PostcodeProcessor.Console
             var driver = ChromeDriverFactory.GetChromeDriver();
             var postcodeMapperRepository = new PostcodeMapperRepository(config.GetValue<string>("SqlConnectionString"));
 
-            // Wait for the rabbitmq container to initialize and start up - swap out with better implementation
-            Thread.Sleep(new TimeSpan(0, 0, 0, 60));
+            // Wait for the rabbitmq and SQL container to initialize and start up - swap out with better implementation
+            Thread.Sleep(new TimeSpan(0, 0, 0, 120));
 
             var factory = new ConnectionFactory
             {

@@ -8,7 +8,7 @@ if [ "$1" = '/opt/mssql/bin/sqlservr' ]; then
       # Wait a bit for SQL Server to start. SQL Server's process doesn't provide a clever way to check if it's up or not, and it needs to be up before we can import the application database
       sleep 15s
       #run the setup script to create the DB and the schema in the DB
-      /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Pass@word -d master -i InitialScript.sql
+      /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$SA_PASSWORD" -d master -i InitialScript.sql
       # Note that the container has been initialized so future starts won't wipe changes to the data
       touch /tmp/app-initialized
     }
