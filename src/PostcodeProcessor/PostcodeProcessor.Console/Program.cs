@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PostcodeProcessor.Infrastructure.Repositories;
 using RabbitMQ.Client;
 using RightmovePostcodeToLocationId.PostcodeProcessor.Console.Factories;
@@ -91,6 +92,12 @@ namespace RightmovePostcodeToLocationId.PostcodeProcessor.Console
                                 {
                                     var locationId = postCodeSplit[1].Split("&").First().Replace("%5", "");
                                     postcodeMapperRepository.Update(postcode, locationId);
+                                    var postcodeLocationId = new
+                                    {
+                                        Postcode = postcode,
+                                        LocationId = locationId
+                                    };
+                                    channel.BasicPublish("", "new-locationid-retrieved", null, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(postcodeLocationId)));
                                 }
                                 else
                                 {

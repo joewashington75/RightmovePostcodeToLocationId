@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LocationIdProcessor.Service": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

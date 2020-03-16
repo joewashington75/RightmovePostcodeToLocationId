@@ -24,3 +24,11 @@ services:
             - rabbitmq
             - postcodepopulator-console
             - sqldata
+
+    locationidprocessor-service:
+        image: ${DOCKER_REGISTRY-}rightmovelocationidprocessorservice
+        build:
+            context: .
+            dockerfile: LocationIdProcessor/LocationIdProcessor.Service/Dockerfile
+        depends_on:
+            - rabbitmq

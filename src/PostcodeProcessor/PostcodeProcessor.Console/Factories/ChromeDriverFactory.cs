@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using OpenQA.Selenium.Chrome;
 
 namespace RightmovePostcodeToLocationId.PostcodeProcessor.Console.Factories
@@ -16,7 +17,7 @@ namespace RightmovePostcodeToLocationId.PostcodeProcessor.Console.Factories
             options.AddArguments("--disable-dev-shm-usage");
             options.AddArguments("--dns-prefetch-disable");
             options.AddArguments("--disable-features=VizDisplayCompositor");
-
+            
             var driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Manage().Window.Maximize();

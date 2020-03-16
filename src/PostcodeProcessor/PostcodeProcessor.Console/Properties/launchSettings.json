@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PostcodeProcessor.Console": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
