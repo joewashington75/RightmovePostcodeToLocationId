@@ -2,7 +2,11 @@ version: '3.4'
 
 services:
     sqldata:
-        image: mcr.microsoft.com/mssql/server:2019-latest
+        image: ${DOCKER_REGISTRY-}rightmovedatabase
+        build:
+            context: .
+            dockerfile: PostcodeProcessor/PostcodeProcessor.Console/Dockerfile.database.dockerfile
+        #image: mcr.microsoft.com/mssql/server:2019-latest
 
     rabbitmq:
         image: rabbitmq:3-management

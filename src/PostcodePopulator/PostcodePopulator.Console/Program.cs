@@ -20,7 +20,7 @@ namespace RightmovePostcodeToLocationId.PostcodePopulator.Console
 
             var addresses = File.ReadAllLines("postcodes-london.csv");
             // Wait for the rabbitmq container to initialize and start up - swap out with better implementation
-            Thread.Sleep(new TimeSpan(0, 0, 0, 30));
+            Thread.Sleep(new TimeSpan(0, 0, 0, 60));
             System.Console.WriteLine($"Host Details : {config.GetSection("Rabbitmq").GetValue<string>("Host")}");
             var factory = new ConnectionFactory
             {
