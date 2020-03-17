@@ -30,5 +30,5 @@ services:
     locationidprocessor-service:
         environment:
             - LocationIdProcessorSettings__Rabbitmq__Host=${SERVICE_BUS:-rabbitmq}
-            - LocationIdProcessorSettings__SqlConnectionString=${AZURE_DB:-Server=sqldata;Database=Postcodes;User Id=sa;Password=Pass@word;MultipleActiveResultSets=true;}
+            - LocationIdProcessorSettings__SqlConnectionString=${AZURE_DB:-Server=sqldata;Database=RightmoveDemo;User Id=sa;Password=Pass@word;MultipleActiveResultSets=true;}
             - OperatingSystem=Linux

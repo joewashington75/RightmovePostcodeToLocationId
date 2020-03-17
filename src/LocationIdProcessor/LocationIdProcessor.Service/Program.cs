@@ -1,7 +1,8 @@
-﻿using System.IO;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RightmovePostcodeToLocationId.LocationIdProcessor.Core.Interfaces.Infrastructure;
+using RightmovePostcodeToLocationId.LocationIdProcessor.Infrastructure.Services;
 using RightmovePostcodeToLocationId.LocationIdProcessor.Service.Settings;
 
 namespace RightmovePostcodeToLocationId.LocationIdProcessor.Service
@@ -33,6 +34,7 @@ namespace RightmovePostcodeToLocationId.LocationIdProcessor.Service
                     }
 
                     var settings = hostBuilderContext.Configuration.GetSection("LocationIdProcessorSettings");
+                    serviceCollection.AddHttpClient<IRightmoveService, RightmoveService>();
                     serviceCollection.Configure<LocationIdProcessorSettings>(settings);
                     serviceCollection.AddHostedService<LocationIdDataRetrieverService>();
                 });

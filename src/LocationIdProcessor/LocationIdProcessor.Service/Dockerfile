@@ -5,6 +5,8 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
+COPY ["LocationIdProcessor/LocationIdProcessor.Infrastructure/LocationIdProcessor.Infrastructure.csproj", "LocationIdProcessor/LocationIdProcessor.Infrastructure/"]
+COPY ["LocationIdProcessor/LocationIdProcessor.Core/LocationIdProcessor.Core.csproj", "LocationIdProcessor/LocationIdProcessor.Core/"]
 COPY ["LocationIdProcessor/LocationIdProcessor.Service/LocationIdProcessor.Service.csproj", "LocationIdProcessor/LocationIdProcessor.Service/"]
 RUN dotnet restore "LocationIdProcessor/LocationIdProcessor.Service/LocationIdProcessor.Service.csproj"
 COPY . .

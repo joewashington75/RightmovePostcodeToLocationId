@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -24,9 +24,15 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="RabbitMQ.Client" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LocationIdProcessor.Core\LocationIdProcessor.Core.csproj" />
+    <ProjectReference Include="..\LocationIdProcessor.Infrastructure\LocationIdProcessor.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>RightmovePostcodeToLocationId.LocationIdProcessor.Core</AssemblyName>
+    <RootNamespace>RightmovePostcodeToLocationId.LocationIdProcessor.Core</RootNamespace>
+  </PropertyGroup>
+
+</Project>
