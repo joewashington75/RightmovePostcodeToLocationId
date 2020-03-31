@@ -1,7 +1,12 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using RightmovePostcodeToLocationId.LocationIdProcessor.Core.Domain;
+using RightmovePostcodeToLocationId.LocationIdProcessor.Core.Entities.Rightmove;
 using RightmovePostcodeToLocationId.LocationIdProcessor.Core.Interfaces.Infrastructure;
+using RightmovePostcodeToLocationId.LocationIdProcessor.Infrastructure.Helpers;
 
 namespace RightmovePostcodeToLocationId.LocationIdProcessor.Infrastructure.Services
 {
@@ -29,9 +34,27 @@ namespace RightmovePostcodeToLocationId.LocationIdProcessor.Infrastructure.Servi
             request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36");
 
             var response = await _httpClient.SendAsync(request);
-            var res = await response.Content.ReadAsStringAsync();
-            //TODO do something with the results
+            var res = JsonConvert.DeserializeObject<RightmovePropertyResponseDto>(await response.Content.ReadAsStringAsync());
             _rightmoveServiceLogger.LogInformation($"Processing postcode {postcode} and locationId {locationId}");
+            if (res.Properties.Any())
+            {
+                foreach (var property in res.Properties)
+                {
+                    var prop = new RightmoveProperty(property.Id, 
+                        property.Bedrooms,
+                        property.PropertySubType.GetPropertyType(), 
+                        property.DisplayAddress, 
+                        property.Price.Amount, 
+                        property.Price.CurrencyCode, 
+                        property.Price.Frequency.GetFrequencyType(), 
+                        postcode, 
+                        new Location(property.Location.Latitude, property.Location.Longitude));
+
+                    // TODO decide where to persist the data
+                }
+            }
+
+            _rightmoveServiceLogger.LogInformation($"Processed postcode {postcode} and locationId {locationId}");
         }
     }
 }
