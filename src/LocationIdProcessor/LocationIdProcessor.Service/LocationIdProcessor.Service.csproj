@@ -26,7 +26,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RabbitMQ.Client" Version="4.1.1" />
   </ItemGroup>
 
